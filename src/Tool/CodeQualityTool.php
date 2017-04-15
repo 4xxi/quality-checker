@@ -2,6 +2,8 @@
 
 namespace QC\Tool;
 
+use QC\Tool\PhpCs\Standard;
+use QC\Tool\PhpCs\StandardPathResolver;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -45,7 +47,7 @@ final class CodeQualityTool extends Application
         $files = $this->extractStagedFiles();
 
         try {
-            $this->runPhpCsWithStandard($files, 'PSR2');
+            $this->runPhpCsWithStandard($files, Standard::SYMFONY);
             $this->writeln('Good job!');
         } catch (ProcessFailedException $e) {
             $this->writeln(trim($e->getProcess()->getOutput()), 'error');
@@ -89,7 +91,7 @@ final class CodeQualityTool extends Application
             $processBuilder = new ProcessBuilder([
                 'php',
                 'bin/phpcs',
-                '--standard='.$standard,
+                '--standard='.StandardPathResolver::resolve($standard),
                 $file,
             ]);
             $processBuilder->setWorkingDirectory(__DIR__ . '/../../../../../');
