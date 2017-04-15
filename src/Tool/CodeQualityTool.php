@@ -2,7 +2,7 @@
 
 namespace QC\Tool;
 
-use QC\Tool\PhpCs\Standard;
+use QC\Tool\PhpCs;
 use QC\Tool\PhpCs\StandardPathResolver;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\InputInterface;
@@ -15,6 +15,7 @@ use Symfony\Component\Process\ProcessBuilder;
  */
 final class CodeQualityTool extends Application
 {
+    const PHP_FILES = '/(\.php)|(\.inc)$/';
     const PHP_FILES_IN_SRC = '/^src\/(.*)(\.php)$/';
     const PHP_FILES_IN_CLASSES = '/^classes\/(.*)(\.php)$/';
 
@@ -47,7 +48,9 @@ final class CodeQualityTool extends Application
         $files = $this->extractStagedFiles();
 
         try {
-            $this->runPhpCsWithStandard($files, Standard::SYMFONY);
+            $this->runPhpLint($files);
+            $this->runPhpCsWithStandard($files, PhpCs\Standard::SYMFONY);
+            $this->runPhpMd($files);
             $this->writeln('Good job!');
         } catch (ProcessFailedException $e) {
             $this->writeln(trim($e->getProcess()->getOutput()), 'error');
@@ -79,7 +82,7 @@ final class CodeQualityTool extends Application
      * @param array  $files
      * @param string $standard
      */
-    private function runPhpCsWithStandard(array $files, $standard)
+    private function runPhpCsWithStandard(array $files = [], $standard)
     {
         $this->writeln(sprintf('Checking code style with PHPCS (%s)', $standard));
 
@@ -88,14 +91,45 @@ final class CodeQualityTool extends Application
                 continue;
             }
 
-            $processBuilder = new ProcessBuilder([
-                'php',
-                'bin/phpcs',
-                '--standard='.StandardPathResolver::resolve($standard),
-                $file,
-            ]);
-            $processBuilder->setWorkingDirectory(__DIR__ . '/../../../../../');
-            $processBuilder->getProcess()->mustRun();
+            $this->createProcessBuilder(['php', 'bin/phpcs', '--standard='.StandardPathResolver::resolve($standard), $file])
+                ->getProcess()
+                ->mustRun();
+        }
+    }
+
+    /**
+     * @param array $files
+     */
+    private function runPhpLint(array $files = [])
+    {
+        $this->writeln('Checking code style with PHPLint');
+
+        foreach ($files as $file) {
+            if (!preg_match(self::PHP_FILES, $file)) {
+                continue;
+            }
+
+            $this->createProcessBuilder(['php', '-l', $file,])
+                ->getProcess()
+                ->mustRun();
+        }
+    }
+
+    /**
+     * @param array $files
+     */
+    private function runPhpMd(array $files = [])
+    {
+        $this->writeln('Checking code style with PHPMD');
+
+        foreach ($files as $file) {
+            if (!preg_match(self::PHP_FILES_IN_SRC, $file)) {
+                continue;
+            }
+
+            $this->createProcessBuilder(['php', 'bin/phpmd', $file, 'text', 'controversial,unusedcode'])
+                ->getProcess()
+                ->mustRun();
         }
     }
 
@@ -106,5 +140,18 @@ final class CodeQualityTool extends Application
     private function writeln($message, $type = 'info')
     {
         $this->output->writeln(sprintf('<%s>%s</%s>', $type, $message, $type));
+    }
+
+    /**
+     * @param array $arguments
+     *
+     * @return ProcessBuilder
+     */
+    private function createProcessBuilder(array $arguments)
+    {
+        $processBuilder = new ProcessBuilder($arguments);
+        $processBuilder->setWorkingDirectory(__DIR__ . '/../../../../../');
+
+        return $processBuilder;
     }
 }
