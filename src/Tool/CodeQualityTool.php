@@ -127,7 +127,7 @@ final class CodeQualityTool extends Application
                 continue;
             }
 
-            $this->createProcessBuilder(['php', 'bin/phpmd', $file, 'text', 'controversial,unusedcode'])
+            $this->createProcessBuilder(['php', 'bin/phpmd', $file, 'text', 'controversial'])
                 ->getProcess()
                 ->mustRun();
         }
