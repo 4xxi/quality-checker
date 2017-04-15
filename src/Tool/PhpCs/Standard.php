@@ -7,8 +7,8 @@ namespace QC\Tool\PhpCs;
  */
 class Standard
 {
-    const PSR2 = 'psr2';
-    const SYMFONY = 'symfony';
+    const PSR2 = 'PSR2';
+    const SYMFONY = 'Symfony';
 
     const AVAILABLE = [
         self::PSR2,
