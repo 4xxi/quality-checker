@@ -22,7 +22,7 @@ class StandardPathResolver
 
         $map = array_combine(Standard::AVAILABLE, [
             'PSR2',
-            __DIR__ . '/../../../../../escapestudios/symfony2-coding-standard',
+            __DIR__ . '/../../../../../escapestudios/symfony2-coding-standard/Symfony2',
         ]);
 
         return $map[$standard];
