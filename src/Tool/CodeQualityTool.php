@@ -1,6 +1,6 @@
 <?php
 
-namespace QC\Tool\CodeQualityTool;
+namespace QC\Tool;
 
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\InputInterface;
