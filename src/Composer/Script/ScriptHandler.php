@@ -35,6 +35,7 @@ final class ScriptHandler
         $targetDir = '.git/hooks/'.$nameHook;
 
         $fs = new Filesystem();
-        $fs->copy($pathHook, $targetDir);
+        $fs->copy($pathHook, $targetDir, true);
+        $fs->chmod($targetDir, 0755);
     }
 }
