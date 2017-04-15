@@ -92,7 +92,7 @@ final class CodeQualityTool extends Application
                 '--standard='.$standard,
                 $file,
             ]);
-            $processBuilder->setWorkingDirectory(__DIR__ . '/../../');
+            $processBuilder->setWorkingDirectory(__DIR__ . '/../../../../../');
             $processBuilder->getProcess()->mustRun();
         }
     }
