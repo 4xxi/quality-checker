@@ -16,11 +16,11 @@ class StandardPathResolver
      */
     public static function resolve($standard)
     {
-        if (!in_array($standard, Standard::AVAILABLE)) {
+        if (!in_array($standard, Standard::available())) {
             throw new \Exception('Unsupported standard');
         }
 
-        $map = array_combine(Standard::AVAILABLE, [
+        $map = array_combine(Standard::available(), [
             'PSR2',
             __DIR__ . '/../../../../../escapestudios/symfony2-coding-standard/Symfony2',
         ]);
