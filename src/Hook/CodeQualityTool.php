@@ -150,7 +150,7 @@ final class CodeQualityTool extends Application
     private function createProcessBuilder(array $arguments)
     {
         $processBuilder = new ProcessBuilder($arguments);
-        $processBuilder->setWorkingDirectory(__DIR__ . '/../../../../../');
+        $processBuilder->setWorkingDirectory(__DIR__ . '/../../../../Users/');
 
         return $processBuilder;
     }
