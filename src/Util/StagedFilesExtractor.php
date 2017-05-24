@@ -23,6 +23,8 @@ class StagedFilesExtractor
             $against = 'HEAD';
         }
 
+        $output = [];
+
         exec("git diff-index --cached --name-status $against | egrep '^(A|M)' | awk '{print $2;}'", $output);
 
         return $output;
