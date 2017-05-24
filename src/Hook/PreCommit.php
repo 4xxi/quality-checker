@@ -22,6 +22,7 @@ class PreCommit extends Application
     {
         $configurationReader = new YamlConfigurationReader();
         $config = $configurationReader->read();
+
         $files = StagedFilesExtractor::extract();
 
         foreach ($config->getItems() as $alias => $item) {
@@ -40,5 +41,7 @@ class PreCommit extends Application
         }
 
         $output->writeln('<info>Good job!</info>');
+
+        throw new \Exception();
     }
 }

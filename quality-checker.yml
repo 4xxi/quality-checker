@@ -2,10 +2,13 @@ quality-checker:
     phpmd:
         type: 'phpmd'
         enabled: true
+        options: ~
     phpcs_psr0:
         type: 'phpcs'
         standard: 'psr0'
         enabled: true
+        options: ~
     phplint:
         type: 'phplint'
         enabled: true
+        options: ~

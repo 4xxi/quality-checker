@@ -33,7 +33,7 @@ class Config
         foreach ($data as $alias => $item) {
             $config->addItem(
                 $alias,
-                new ConfigItem($item['type'], $item['enabled'], $item['options'])
+                new ConfigItem($item['type'], $item['enabled'], $item['options'] ? $item['options'] : [])
             );
         }
 
