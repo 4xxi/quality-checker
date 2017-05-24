@@ -41,7 +41,5 @@ class PreCommit extends Application
         }
 
         $output->writeln('<info>Good job!</info>');
-
-        throw new \Exception();
     }
 }

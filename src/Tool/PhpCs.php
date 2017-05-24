@@ -19,7 +19,7 @@ class PhpCs extends AbstractTool
 
         foreach ($phpFiles as $file) {
             $this->run(
-                sprintf('php %s --standard=%s %s %s', PathResolver::resolve('phpcs'), $this->options['standard'], $file)
+                sprintf('php %s --standard=%s %s', PathResolver::resolve('phpcs'), $this->options['standard'], $file)
             );
         }
     }

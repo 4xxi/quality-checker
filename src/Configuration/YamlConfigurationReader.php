@@ -19,7 +19,7 @@ class YamlConfigurationReader
     {
         $data = $this->configFileExists() ? $this->getConfigData() : [];
 
-        return Config::fromArray($data['quality-checker']);
+        return Config::fromArray($data);
     }
 
     /**
@@ -35,6 +35,6 @@ class YamlConfigurationReader
      */
     private function getConfigData()
     {
-        return Yaml::parse(file_get_contents(self::CONFIG_FILE));
+        return Yaml::parse(file_get_contents(self::CONFIG_FILE))['quality-checker'];
     }
 }

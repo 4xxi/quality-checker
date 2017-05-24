@@ -20,7 +20,7 @@ class PhpMd extends AbstractTool
 
         foreach ($phpFiles as $file) {
             $this->run(
-                sprintf('php %s %s text %s', PathResolver::resolve('phpcs'), $file, $this->options['rules'])
+                sprintf('php %s %s text %s', PathResolver::resolve('phpmd'), $file, $this->options['rules'])
             );
         }
     }
