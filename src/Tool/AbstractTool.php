@@ -3,6 +3,7 @@
 namespace QC\Tool;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Process\Process;
 
 /**
  * Class AbstractTool.
@@ -10,23 +11,82 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 abstract class AbstractTool
 {
     /**
-     * @param array $files
-     * @param array $options
+     * @var array
      */
-    abstract public function execute(array $files, array $options);
+    protected $options = [];
 
     /**
-     * @param array $options
-     *
-     * @return array
+     * @var array
      */
-    protected function setDefaultOptions(array $options)
+    protected $errors = [];
+
+    /**
+     * AbstractTool constructor.
+     * @param array $options
+     */
+    public function __construct(array $options = [])
     {
         $resolver = new OptionsResolver();
 
         $this->configureOptions($resolver);
 
-        return $resolver->resolve($options);
+        $this->options = $resolver->resolve($options);
+    }
+
+    /**
+     * @param string $type
+     * @param array $options
+     *
+     * @return AbstractTool
+     */
+    public static function type($type, array $options = [])
+    {
+        switch ($type) {
+            case 'phpmd':
+                return new PhpMd($options);
+            case 'phpcs':
+                return new PhpCs($options);
+            case 'phplint':
+                return new PhpLint($options);
+            case 'custom':
+                return new Custom($options);
+            default:
+                throw new \InvalidArgumentException('Unsupported tool type');
+        }
+    }
+
+    /**
+     * @return array
+     */
+    public function getErrors()
+    {
+        return $this->errors;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasErrors()
+    {
+        return (bool) count($this->errors);
+    }
+
+    /**
+     * @param array $files
+     */
+    abstract public function execute(array $files);
+
+    /**
+     * @param string $command
+     */
+    protected function run($command)
+    {
+        $process = new Process($command);
+        $process->run();
+
+        if (false === $process->isSuccessful()) {
+            $this->errors[] = $process->getOutput();
+        }
     }
 
     /**
@@ -34,5 +94,20 @@ abstract class AbstractTool
      */
     protected function configureOptions(OptionsResolver $resolver)
     {
+    }
+
+    /**
+     * @param array $files
+     *
+     * @return array
+     */
+    protected function extractPhpFiles(array $files)
+    {
+        return array_filter(
+            $files,
+            function ($file) {
+                return preg_match('/(\.php)|(\.inc)$/', $file);
+            }
+        );
     }
 }

@@ -3,18 +3,18 @@
 namespace QC\Configuration\Model;
 
 /**
- * Class Chain.
+ * Class Config.
  */
-class Chain
+class Config
 {
     /**
-     * @var array|ChainItem[]
+     * @var array|ConfigItem[]
      */
     private $items;
 
     /**
      * Chain constructor.
-     * @param array|ChainItem[] $items
+     * @param array|ConfigItem[] $items
      */
     public function __construct(array $items = [])
     {
@@ -22,16 +22,35 @@ class Chain
     }
 
     /**
-     * @param string    $name
-     * @param ChainItem $item
+     * @param array $data
+     *
+     * @return $this
      */
-    public function addItem($name, ChainItem $item)
+    public static function fromArray(array $data = [])
+    {
+        $config = new self();
+
+        foreach ($data as $alias => $item) {
+            $config->addItem(
+                $alias,
+                new ConfigItem($item['type'], $item['enabled'], $item['options'])
+            );
+        }
+
+        return $config;
+    }
+
+    /**
+     * @param string    $name
+     * @param ConfigItem $item
+     */
+    public function addItem($name, ConfigItem $item)
     {
         $this->items[$name] = $item;
     }
 
     /**
-     * @return array|ChainItem[]
+     * @return array|ConfigItem[]
      */
     public function getItems()
     {

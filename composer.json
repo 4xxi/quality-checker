@@ -19,7 +19,8 @@
         "symfony/filesystem": "3.*",
         "symfony/process": "3.*",
         "symfony/options-resolver": "3.*",
-        "phpmd/phpmd": "^2.6"
+        "phpmd/phpmd": "^2.6",
+        "symfony/yaml": "3.*"
     },
     "config": {
       "bin-dir": "bin"

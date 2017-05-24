@@ -14,18 +14,14 @@ class PhpLint extends AbstractTool
     /**
      * {@inheritdoc}
      */
-    public function execute(array $files, array $options)
+    public function execute(array $files)
     {
-        foreach ($files as $file) {
-            $processBuilder = new ProcessBuilder(
-                [
-                    'php',
-                    '-l',
-                    $file,
-                ]
-            );
+        $phpFiles = $this->extractPhpFiles($files);
 
-            $processBuilder->getProcess()->mustRun();
+        foreach ($phpFiles as $file) {
+            $this->run(
+                sprintf('php -l %s', $file)
+            );
         }
     }
 }

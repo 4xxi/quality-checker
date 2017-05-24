@@ -3,23 +3,24 @@
 namespace QC\Tool;
 
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Process\Process;
 
 /**
  * Class Custom.
  */
 class Custom extends AbstractTool
 {
-    /**
-     * @param array $files
-     * @param array $options
-     */
-    public function execute(array $files, array $options)
-    {
-        $options = $this->setDefaultOptions($options);
+    const FILE_PLACEHOLDER = '{path}';
 
-        $process = new Process($options['command']);
-        $process->mustRun();
+    /**
+     * {@inheritdoc}
+     */
+    public function execute(array $files)
+    {
+        foreach ($files as $file) {
+            $this->run(
+                str_replace(static::FILE_PLACEHOLDER, $file, $this->options['cmd'])
+            );
+        }
     }
 
     /**

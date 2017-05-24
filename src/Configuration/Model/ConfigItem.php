@@ -3,9 +3,9 @@
 namespace QC\Configuration\Model;
 
 /**
- * Class ChainItem.
+ * Class ConfigItem.
  */
-class ChainItem
+class ConfigItem
 {
     /**
      * @var string

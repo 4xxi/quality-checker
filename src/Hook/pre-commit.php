@@ -3,7 +3,5 @@
 
 require __DIR__ . '/../../vendor/autoload.php';
 
-use QC\Tool\CodeQualityTool;
-
-$application = new CodeQualityTool();
+$application = new \QC\Hook\PreCommit();
 $application->run();

@@ -4,7 +4,6 @@ namespace QC\Tool;
 
 use QC\Util\PathResolver;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Process\ProcessBuilder;
 
 /**
  * Class PhpCs.
@@ -14,22 +13,14 @@ class PhpCs extends AbstractTool
     /**
      * {@inheritdoc}
      */
-    public function execute(array $files, array $options)
+    public function execute(array $files)
     {
-        $options = $this->setDefaultOptions($options);
+        $phpFiles = $this->extractPhpFiles($files);
 
-        foreach ($files as $file) {
-            $processBuilder = new ProcessBuilder(
-                [
-                    'php',
-                    PathResolver::resolve('phpcs'),
-                    '--standard=%s'.$options['standard'],
-                    '--ignore=%s'.$options['ignore'],
-                    $file,
-                ]
+        foreach ($phpFiles as $file) {
+            $this->run(
+                sprintf('php %s --standard=%s %s %s', PathResolver::resolve('phpcs'), $this->options['standard'], $file)
             );
-
-            $processBuilder->getProcess()->mustRun();
         }
     }
 
@@ -38,9 +29,9 @@ class PhpCs extends AbstractTool
      */
     protected function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setRequired('standard');
-        $resolver->setAllowedTypes('standard', 'string');
-        $resolver->setDefault('ignore', '');
-        $resolver->setAllowedTypes('ignore', 'string');
+        $resolver
+            ->setRequired('standard')
+            ->setAllowedTypes('standard', 'string')
+        ;
     }
 }

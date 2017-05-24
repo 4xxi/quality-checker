@@ -18,7 +18,7 @@ final class ScriptHandler
     public static function installHooks(Event $event)
     {
         $hooks = [
-            'pre-commit' => __DIR__ . '/../../pre-commit.php',
+            'pre-commit' => __DIR__ . '/../../Hook/pre-commit.php',
         ];
 
         foreach ($hooks as $nameHook => $pathScriptHook) {

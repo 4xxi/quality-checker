@@ -1,6 +1,6 @@
 <?php
 
-namespace QC\File;
+namespace QC\Util;
 
 /**
  * Class StagedFilesExtractor.
@@ -10,7 +10,7 @@ class StagedFilesExtractor
     /**
      * @return array
      */
-    public function extract()
+    public static function extract()
     {
         $output = [];
         $rc = 0;

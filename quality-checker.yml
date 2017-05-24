@@ -1,0 +1,11 @@
+quality-checker:
+    phpmd:
+        type: 'phpmd'
+        enabled: true
+    phpcs_psr0:
+        type: 'phpcs'
+        standard: 'psr0'
+        enabled: true
+    phplint:
+        type: 'phplint'
+        enabled: true

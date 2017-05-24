@@ -2,23 +2,39 @@
 
 namespace QC\Configuration;
 
-use QC\Configuration\Model\Chain;
+use QC\Configuration\Model\Config;
 use Symfony\Component\Yaml\Yaml;
 
 /**
- * Class ChainBuilder.
+ * Class YamlConfigurationReader.
  */
-class ChainBuilder
+class YamlConfigurationReader
 {
     const CONFIG_FILE = 'quality-checker.yml';
 
     /**
-     * @return Chain
+     * @return Config
      */
-    public function build()
+    public function read()
     {
-        $config = Yaml::parse(file_get_contents(self::CONFIG_FILE));
+        $data = $this->configFileExists() ? $this->getConfigData() : [];
 
-        var_dump($config); exit;
+        return Config::fromArray($data['quality-checker']);
+    }
+
+    /**
+     * @return bool
+     */
+    private function configFileExists()
+    {
+        return file_exists(self::CONFIG_FILE);
+    }
+
+    /**
+     * @return array
+     */
+    private function getConfigData()
+    {
+        return Yaml::parse(file_get_contents(self::CONFIG_FILE));
     }
 }
