@@ -40,7 +40,13 @@ That's it! Install tool and try to commit:
 Configuration
 -------------
 
-The configuration is carried out through a file `quality.yml`
+The basic architectural principle is working with _suites_. 
+
+You should use default suites provided by library or configure your own. For more information take a look at Example section.
+
+The suites configuration is carried out through a file `quality.yml`
+
+Default configuration:
 
 ```
 suites:
@@ -73,7 +79,16 @@ Usage
 * As pre-commit hook
 * Manual run through command line
 
-```
+Examples
+--------
+
+Run quality check of `src/` dir with default suite and autofix feature 
+
     $ bin/quality-checker quality:check src/ --autofix
-```
+
+Run quality check of all staged files with custom suite:
+
+    $ bin/quality-checker quality:check --suite=my_own_suite
+
+
 
