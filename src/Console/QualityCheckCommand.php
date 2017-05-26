@@ -50,6 +50,11 @@ class QualityCheckCommand extends Command
         $files = $this->extractFiles($input);
 
         $suiteProcessor = new Processor(new YamlRepository(), $output);
+
+        if ($input->getOption('autofix')) {
+            $suiteProcessor->process('fix', $files);
+        }
+
         $suiteProcessor->process($input->getOption('suite'), $files);
     }
 
