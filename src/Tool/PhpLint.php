@@ -2,10 +2,6 @@
 
 namespace QC\Tool;
 
-use QC\Util\PathResolver;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Process\ProcessBuilder;
-
 /**
  * Class PhpLint.
  */

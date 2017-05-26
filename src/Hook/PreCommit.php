@@ -2,12 +2,9 @@
 
 namespace QC\Hook;
 
-use QC\Configuration\YamlConfigurationReader;
-use QC\Exception\QualityToolViolationException;
 use QC\Suite\Processor;
 use QC\Suite\Repository\YamlRepository;
 use QC\Util\StagedFilesExtractor;
-use QC\Tool\AbstractTool;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace QC\Tool;
 
 use QC\Util\PathResolver;

@@ -22,6 +22,7 @@ abstract class AbstractTool
 
     /**
      * AbstractTool constructor.
+     *
      * @param array $options
      */
     public function __construct(array $options = [])
@@ -108,7 +109,7 @@ abstract class AbstractTool
         return array_filter(
             $files,
             function ($file) {
-                return preg_match('/(\.php)|(\.inc)$/', $file);
+                return preg_match('/(\.php)|(\.inc)|(\/)$/', $file);
             }
         );
     }
