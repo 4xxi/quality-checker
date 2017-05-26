@@ -21,7 +21,7 @@ class QualityCheckCommand extends Command
      */
     protected function configure()
     {
-        $this->setName('quality:check');
+        $this->setName('check');
         $this->addArgument(
             'path',
             InputArgument::IS_ARRAY | InputArgument::OPTIONAL,

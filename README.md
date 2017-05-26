@@ -84,11 +84,11 @@ Examples
 
 Run quality check of `src/` dir with default suite and autofix feature 
 
-    $ bin/quality-checker quality:check src/ --autofix
+    $ bin/quality-checker check src/ --autofix
 
 Run quality check of all staged files with custom suite:
 
-    $ bin/quality-checker quality:check --suite=my_own_suite
+    $ bin/quality-checker check --suite=my_own_suite
 
 
 
