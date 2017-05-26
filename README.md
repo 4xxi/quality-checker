@@ -36,6 +36,12 @@ Also you can place hook manually
 That's it! Install tool and try to commit:
 
     $ composer require --dev eglebov/quality-checker
+
+Use cases
+----------
+
+* As self-installing git pre-commit hook
+* Command line tool
     
 Configuration
 -------------
@@ -72,12 +78,6 @@ suites:
             options:
                 rules: '@Symfony'
 ```
-
-Usage
------
-
-* As pre-commit hook
-* Manual run through command line
 
 Examples
 --------
