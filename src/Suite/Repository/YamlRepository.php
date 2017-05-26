@@ -10,7 +10,7 @@ use Symfony\Component\Yaml\Yaml;
  */
 class YamlRepository implements RepositoryInterface
 {
-    const CONFIG_FILE = 'quality-checker.yml';
+    const CONFIG_FILE = 'quality.yml';
 
     /**
      * @param string $suite

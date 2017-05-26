@@ -30,7 +30,7 @@ class PhpMd extends AbstractTool
     protected function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefault('rules', './PhpMdRules.xml')
+            ->setDefault('rules', 'controversial')
         ;
     }
 }
