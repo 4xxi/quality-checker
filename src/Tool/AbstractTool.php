@@ -35,7 +35,7 @@ abstract class AbstractTool
 
     /**
      * @param string $type
-     * @param array $options
+     * @param array  $options
      *
      * @return AbstractTool
      */
@@ -48,6 +48,8 @@ abstract class AbstractTool
                 return new PhpCs($options);
             case 'phplint':
                 return new PhpLint($options);
+            case 'phpcs-fixer':
+                return new PhpCsFixer($options);
             case 'custom':
                 return new Custom($options);
             default:

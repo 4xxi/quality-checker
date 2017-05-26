@@ -1,20 +1,21 @@
 <?php
 
-namespace QC\Configuration\Model;
+namespace QC\Suite;
 
 /**
- * Class Config.
+ * Class Suite.
  */
-class Config
+class Suite
 {
     /**
-     * @var array|ConfigItem[]
+     * @var array|SuiteItem[]
      */
     private $items;
 
     /**
      * Chain constructor.
-     * @param array|ConfigItem[] $items
+     *
+     * @param array|SuiteItem[] $items
      */
     public function __construct(array $items = [])
     {
@@ -33,7 +34,7 @@ class Config
         foreach ($data as $alias => $item) {
             $config->addItem(
                 $alias,
-                new ConfigItem($item['type'], $item['enabled'], $item['options'] ? $item['options'] : [])
+                new SuiteItem($item['type'], $item['enabled'], $item['options'] ? $item['options'] : [])
             );
         }
 
@@ -42,15 +43,15 @@ class Config
 
     /**
      * @param string    $name
-     * @param ConfigItem $item
+     * @param SuiteItem $item
      */
-    public function addItem($name, ConfigItem $item)
+    public function addItem($name, SuiteItem $item)
     {
         $this->items[$name] = $item;
     }
 
     /**
-     * @return array|ConfigItem[]
+     * @return array|SuiteItem[]
      */
     public function getItems()
     {

@@ -1,11 +1,11 @@
 <?php
 
-namespace QC\Configuration\Model;
+namespace QC\Suite;
 
 /**
- * Class ConfigItem.
+ * Class SuiteItem.
  */
-class ConfigItem
+class SuiteItem
 {
     /**
      * @var string
@@ -24,9 +24,10 @@ class ConfigItem
 
     /**
      * ChainItem constructor.
+     *
      * @param string $type
-     * @param bool $enabled
-     * @param array $options
+     * @param bool   $enabled
+     * @param array  $options
      */
     public function __construct($type, $enabled, array $options = [])
     {

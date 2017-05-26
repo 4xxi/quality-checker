@@ -19,7 +19,7 @@ class PhpCsFixer extends AbstractTool
 
         foreach ($phpFiles as $file) {
             $this->run(
-                sprintf('php %s fix %s --level=%s', PathResolver::resolve('phpcs'), $file, $this->options['level'])
+                sprintf('php %s fix %s --rules=%s', PathResolver::resolve('php-cs-fixer'), $file, $this->options['rules'])
             );
         }
     }
@@ -30,8 +30,8 @@ class PhpCsFixer extends AbstractTool
     protected function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setRequired('level')
-            ->setAllowedTypes('standard', 'string')
+            ->setRequired('rules')
+            ->setAllowedTypes('rules', 'string')
         ;
     }
 }

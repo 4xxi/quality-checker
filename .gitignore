@@ -1,4 +1,5 @@
 .idea/
 vendor/
-bin/
+bin/*
+!bin/quality-checker
 quality-checker.yml

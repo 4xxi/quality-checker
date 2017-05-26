@@ -25,5 +25,8 @@
     },
     "config": {
       "bin-dir": "bin"
-    }
+    },
+    "bin": [
+        "bin/quality-checker"
+    ]
 }

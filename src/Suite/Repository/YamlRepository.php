@@ -1,25 +1,31 @@
 <?php
 
-namespace QC\Configuration;
+namespace QC\Suite\Repository;
 
-use QC\Configuration\Model\Config;
+use QC\Suite\Suite;
 use Symfony\Component\Yaml\Yaml;
 
 /**
- * Class YamlConfigurationReader.
+ * Class YamlRepository.
  */
-class YamlConfigurationReader
+class YamlRepository implements RepositoryInterface
 {
     const CONFIG_FILE = 'quality-checker.yml';
 
     /**
-     * @return Config
+     * @param string $suite
+     *
+     * @return Suite|null
      */
-    public function read()
+    public function find($suite)
     {
         $data = $this->configFileExists() ? $this->getConfigData() : [];
 
-        return Config::fromArray($data);
+        if (!isset($data[$suite])) {
+            return null;
+        }
+
+        return Suite::fromArray($data[$suite]);
     }
 
     /**
@@ -35,6 +41,6 @@ class YamlConfigurationReader
      */
     private function getConfigData()
     {
-        return Yaml::parse(file_get_contents(self::CONFIG_FILE))['quality-checker'];
+        return Yaml::parse(file_get_contents(self::CONFIG_FILE))['suites'];
     }
 }
