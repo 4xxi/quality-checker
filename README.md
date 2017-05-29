@@ -22,11 +22,11 @@ Configure pre-install, pre-update hook at composer.json
 
     "post-install-cmd": [
         // ...
-        "QC\\Composer\\Script\\ScriptHandler::installHooks"
+        "QC\\Composer\\Script\\ScriptHandler::install"
     ],
     "post-update-cmd": [
         // ...  
-        "QC\\Composer\\Script\\ScriptHandler::installHooks"
+        "QC\\Composer\\Script\\ScriptHandler::install"
     ]
     
 Also you can place hook manually

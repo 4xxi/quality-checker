@@ -2,4 +2,3 @@
 vendor/
 bin/*
 !bin/quality-checker
-quality.yml

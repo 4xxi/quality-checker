@@ -12,10 +12,17 @@ final class ScriptHandler
 {
     /**
      * @param Event $event
-     *
+     */
+    public function install(Event $event)
+    {
+        self::installHooks();
+        self::installConfig();
+    }
+
+    /**
      * @throws \Exception
      */
-    public static function installHooks(Event $event)
+    public static function installHooks()
     {
         $hooks = [
             'pre-commit' => __DIR__.'/../../Hook/pre-commit.php',
@@ -37,5 +44,17 @@ final class ScriptHandler
         $fs = new Filesystem();
         $fs->copy($pathHook, $targetDir, true);
         $fs->chmod($targetDir, 0755);
+    }
+
+    /**
+     *
+     */
+    public static function installConfig()
+    {
+        $pathConfig = __DIR__.'/../../../quality.yml.dist';
+        $pathDestination = rtrim(getcwd(), DIRECTORY_SEPARATOR).'/quality.yml';
+
+        $fs = new Filesystem();
+        $fs->copy($pathConfig, $pathDestination);
     }
 }
