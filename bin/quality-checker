@@ -1,0 +1,11 @@
+#!/usr/bin/php
+<?php
+
+require __DIR__ . '/../vendor/autoload.php';
+
+use Symfony\Component\Console\Application;
+use QC\Console\QualityCheckCommand;
+
+$application = new Application('Quality checker');
+$application->add(new QualityCheckCommand());
+$application->run();

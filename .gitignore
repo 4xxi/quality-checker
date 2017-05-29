@@ -1,3 +1,4 @@
 .idea/
 vendor/
-bin/
+bin/*
+!bin/quality-checker
