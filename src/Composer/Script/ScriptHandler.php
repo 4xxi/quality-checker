@@ -13,7 +13,7 @@ final class ScriptHandler
     /**
      * @param Event $event
      */
-    public function install(Event $event)
+    public static function install(Event $event)
     {
         self::installHooks();
         self::installConfig();
