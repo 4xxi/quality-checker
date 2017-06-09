@@ -11,7 +11,7 @@ Check following lines to composer.json (repository section):
     "repositories": [
         {
             "type": "git",
-            "url": "git@bitbucket.org:eglebov/quality-checker.git"
+            "url": "http://github.com/4xxi/quality-checker.git"
         }
     ],
     "config": {
@@ -31,11 +31,11 @@ Configure pre-install, pre-update hook at composer.json
     
 Also you can place hook manually
 
-    $ cp vendor/eglebov/quality-checker/src/Hook/pre-commit.php .git/hooks
+    $ cp vendor/4xxi/quality-checker/src/Hook/pre-commit.php .git/hooks
 
 That's it! Install tool and try to commit:
 
-    $ composer require --dev eglebov/quality-checker
+    $ composer require --dev 4xxi/quality-checker
 
 Use cases
 ----------
