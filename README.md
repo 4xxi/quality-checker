@@ -35,7 +35,7 @@ Also you can place hook manually
 
 That's it! Install tool and try to commit:
 
-    $ composer require --dev 4xxi/quality-checker:dev-master
+    $ composer require --dev 4xxi/quality-checker
 
 Use cases
 ----------
