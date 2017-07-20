@@ -25,8 +25,15 @@ class StagedFilesExtractor
 
         $output = [];
 
-        exec("git diff-index --cached --name-status $against | egrep '^(A|M)' | awk '{print $2;}'", $output);
+        exec("git diff-index --cached --name-status $against", $output);
 
-        return $output;
+        return array_filter(
+            array_map(
+                function ($string) {
+                    return preg_match('/^(A|M)(.*)/', $string, $matches) ? ltrim($matches[2]) : null;
+                },
+                $output
+            )
+        );
     }
 }
