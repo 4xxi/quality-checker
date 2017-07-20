@@ -1,7 +1,7 @@
 Quality Checker Tool
 ====================
 
-Simple utility for check your code style
+Simple utility for check your code style!
 
 Install
 -------
