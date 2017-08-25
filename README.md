@@ -11,7 +11,7 @@ Check following lines to composer.json (repository section):
     "repositories": [
         {
             "type": "git",
-            "url": "http://github.com/4xxi/quality-checker.git"
+            "url": "https://github.com/4xxi/quality-checker.git"
         }
     ],
     "config": {
